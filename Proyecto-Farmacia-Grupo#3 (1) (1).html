@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Farmacia Salud+</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f6f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ce2222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #ce2222;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #21867a;
+    }
+
+    .producto {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .producto img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-right: 15px;
+    }
+
+    .producto h4 {
+      margin: 0 0 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Farmacia Salud+</h1>
+  </header>
+
+  <main>
+    <!-- Página 1 -->
+    <section id="pagina1" class="active">
+      <h2>Registro del Usuario</h2>
+      <label>Nombre completo:</label>
+      <input type="text" id="nombre" required>
+
+      <label>Correo electrónico:</label>
+      <input type="email" id="correo" required>
+
+      <label>Teléfono:</label>
+      <input type="tel" id="telefono" required>
+
+      <button onclick="mostrarPagina('pagina2')">Siguiente</button>
+    </section>
+
+    <!-- Página 2 -->
+<section id="pagina2">
+  <h2>Catálogo de Medicamentos</h2>
+
+  <div class="producto">
+    <img src="https://boticaportugal.com/cdn/shop/products/9342026360_017bd28d-a290-43bc-9388-25a88e0d8800.png?v=1648745441">
+    <div>
+      <h4>Paracetamol 500mg</h4>
+      <p>Alivia el dolor y reduce la fiebre.</p>
+    </div>
+  </div>
+
+  <div class="producto">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGKeOfgG707Ajoj8izq71Adv3hiH9rSsdtmw&s">
+    <div>
+      <h4>Ibuprofeno 400mg</h4>
+      <p>Antiinflamatorio y analgésico.</p>
+    </div>
+  </div>
+
+  <div class="producto">
+    <img src="https://i0.wp.com/megalabs.com.bo/wp-content/uploads/2022/11/Amoxidal-Duo.png?fit=950%2C950&ssl=1">
+    <div>
+      <h4>Amoxicilina 875mg</h4>
+      <p>Antibiótico para infecciones bacterianas.</p>
+    </div>
+  </div>
+
+  <div class="producto">
+    <img src="https://sanorim.mx/cdn/shop/files/LORATADINASALUCOM.png?v=1722011044">
+    <div>
+      <h4>Loratadina 10mg</h4>
+      <p>Antihistamínico para alergias.</p>
+    </div>
+  </div>
+
+  <button onclick="mostrarPagina('pagina3')">Siguiente</button>
+</section>
+
+
+    <!-- Página 3 -->
+    <section id="pagina3">
+      <h2>Realizar Pedido</h2>
+      <label>Producto:</label>
+      <select id="producto">
+        <option value="Paracetamol">Paracetamol</option>
+        <option value="Ibuprofeno">Ibuprofeno</option>
+        <option value="Amoxicilina">Amoxicilina</option>
+        <option value="Loratadina">Loratadina</option>
+      </select>
+
+      <label>Cantidad:</label>
+      <input type="number" id="cantidad" min="1" max="10">
+
+      <button onclick="mostrarResumen()">Siguiente</button>
+    </section>
+
+    <!-- Página 4 -->
+    <section id="pagina4">
+      <h2>Resumen del Pedido</h2>
+      <p><strong>Nombre:</strong> <span id="resNombre"></span></p>
+      <p><strong>Correo:</strong> <span id="resCorreo"></span></p>
+      <p><strong>Teléfono:</strong> <span id="resTelefono"></span></p>
+      <p><strong>Producto:</strong> <span id="resProducto"></span></p>
+      <p><strong>Cantidad:</strong> <span id="resCantidad"></span></p>
+      <button onclick="mostrarPagina('pagina5')">Confirmar Pedido</button>
+    </section>
+
+    <!-- Página 5 -->
+    <section id="pagina5">
+      <h2>¡Gracias por tu pedido!</h2>
+      <p>Recibirás un correo de confirmación en breve.</p>
+      <button onclick="mostrarPagina('pagina1')">Volver al inicio</button>
+    </section>
+  </main>
+
+  <script>
+    function mostrarPagina(id) {
+      const secciones = document.querySelectorAll('section');
+      secciones.forEach(seccion => seccion.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function mostrarResumen() {
+      document.getElementById("resNombre").textContent = document.getElementById("nombre").value;
+      document.getElementById("resCorreo").textContent = document.getElementById("correo").value;
+      document.getElementById("resTelefono").textContent = document.getElementById("telefono").value;
+      document.getElementById("resProducto").textContent = document.getElementById("producto").value;
+      document.getElementById("resCantidad").textContent = document.getElementById("cantidad").value;
+
+      mostrarPagina('pagina4');
+    }
+  </script>
+</body>
+</html>
